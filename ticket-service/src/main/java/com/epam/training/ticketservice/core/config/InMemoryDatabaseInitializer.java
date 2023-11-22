@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.core.config;
 
+import com.epam.training.ticketservice.core.user.UserService;
 import com.epam.training.ticketservice.core.user.persistence.User;
 import com.epam.training.ticketservice.core.user.persistence.UserRepository;
 import com.epam.training.ticketservice.core.user.persistence.UserRole;
@@ -19,5 +20,8 @@ public class InMemoryDatabaseInitializer {
     public void init() {
         User admin = new User("admin","admin", UserRole.ADMIN);
         userRepository.save(admin);
+
+        User test = new User("test","test", UserRole.USER);
+        userRepository.save(test);
     }
 }
