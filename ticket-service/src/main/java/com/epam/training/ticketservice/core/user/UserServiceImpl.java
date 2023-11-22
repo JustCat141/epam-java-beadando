@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     public Optional<UserDto> login(String username, String password) {
         Optional<User> user = userRepository.findByUsernameAndPassword(username,password);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return Optional.empty();
         }
         loggedInUser = new UserDto(user.get().getUsername(),user.get().getRole());
