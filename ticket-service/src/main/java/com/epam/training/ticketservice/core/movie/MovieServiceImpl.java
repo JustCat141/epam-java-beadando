@@ -57,17 +57,14 @@ public class MovieServiceImpl implements MovieService {
         }
 
         movieRepository.deleteById(title);
-        return Optional.of(new MovieDto(
-                movie.get().getTitle(),
-                movie.get().getGenre(),
-                movie.get().getLength()));
+        return Optional.of(movie.get().asDto());
     }
 
     @Override
     public List<MovieDto> getMovieList() {
         return movieRepository.findAll()
                 .stream()
-                .map(movie -> new MovieDto(movie.getTitle(), movie.getGenre(), movie.getLength()))
+                .map(Movie::asDto)
                 .toList();
     }
 }
