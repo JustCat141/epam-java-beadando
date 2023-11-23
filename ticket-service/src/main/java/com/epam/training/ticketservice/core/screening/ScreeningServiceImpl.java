@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -48,11 +49,21 @@ public class ScreeningServiceImpl implements ScreeningService {
 
             var otherStart = other.getStartOfScreening();
             var otherEnd = other.getStartOfScreening().plusMinutes(other.getMovie().getLength() + additionalTime);
-            
+
             if (screeningStart.isBefore(otherEnd) && screeningEnd.isAfter(otherStart)) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public Optional<ScreeningDto> deleteScreening(String movieTitle, String roomName, LocalDateTime startOfScreening) {
+        var screening = screeningRepository.findByMovieTitleAndRoomNameAndStartOfScreening(movieTitle, roomName, startOfScreening);
+        if (screening.isPresent()) {
+            screening.ifPresent(screeningRepository::delete);
+            return Optional.of(screening.get().asDto());
+        }
+        return Optional.empty();
     }
 }

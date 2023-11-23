@@ -12,4 +12,6 @@ public interface ScreeningService {
     void uploadScreening(ScreeningDto screeningDto);
 
     boolean isOverlapping(ScreeningDto screeningDto, int additionalTime);
+
+    Optional<ScreeningDto> deleteScreening(String movieTitle,String roomName, LocalDateTime startOfScreening);
 }
