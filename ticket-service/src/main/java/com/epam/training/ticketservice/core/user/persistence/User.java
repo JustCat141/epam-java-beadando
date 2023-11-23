@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.core.user.persistence;
 
+import com.epam.training.ticketservice.core.user.model.UserDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,5 +28,9 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public UserDto asDto() {
+        return new UserDto(username,role);
     }
 }

@@ -29,14 +29,14 @@ public class MovieCommand {
         var movie = new MovieDto(title, genre, length);
         return movieService.updateMovie(movie)
                 .map(movieDto -> movieDto.title() + " has been updated!")
-                .orElse("There are no movies with this name!");
+                .orElse("There are no movies with this title!");
     }
 
     @ShellMethod(key = "delete movie", value = "Deletes a movie")
     public String deleteMovie(String title) {
         return movieService.deleteMovie(title)
                 .map(movieDto -> movieDto.title() + " was deleted successfully!")
-                .orElse("There are no movies with this name!");
+                .orElse("There are no movies with this title!");
     }
 
     @ShellMethod(key = "list movies", value = "Lists movies")
