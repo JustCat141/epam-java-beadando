@@ -41,7 +41,7 @@ public class RoomCommand {
         var rooms = roomService.getRoomList();
 
         if (rooms.isEmpty()) {
-            return "There are no movies at the moment";
+            return "There are no rooms at the moment";
         }
         return rooms
                 .stream()
