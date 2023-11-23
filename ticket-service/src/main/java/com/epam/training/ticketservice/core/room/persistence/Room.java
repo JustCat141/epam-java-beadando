@@ -5,18 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "rooms")
 public class Room {
     @Id
+    @GeneratedValue
+    private Integer id;
+
     @Column(unique = true)
     private String name;
 
@@ -26,5 +25,11 @@ public class Room {
 
     public RoomDto asDto() {
         return new RoomDto(name,seatRows,seatColumns);
+    }
+
+    public Room(String name, Integer seatRows, Integer seatColumns) {
+        this.name = name;
+        this.seatRows = seatRows;
+        this.seatColumns = seatColumns;
     }
 }
