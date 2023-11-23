@@ -1,5 +1,9 @@
 package com.epam.training.ticketservice.core.config;
 
+import com.epam.training.ticketservice.core.movie.persistence.Movie;
+import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
+import com.epam.training.ticketservice.core.room.persistence.Room;
+import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import com.epam.training.ticketservice.core.user.UserService;
 import com.epam.training.ticketservice.core.user.persistence.User;
 import com.epam.training.ticketservice.core.user.persistence.UserRepository;
@@ -14,6 +18,8 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 @Profile(value = "!prod")
 public class InMemoryDatabaseInitializer {
+    private final RoomRepository roomRepository;
+    private final MovieRepository movieRepository;
     private final UserRepository userRepository;
 
     @PostConstruct
@@ -23,5 +29,15 @@ public class InMemoryDatabaseInitializer {
 
         User test = new User("test","test", UserRole.USER);
         userRepository.save(test);
+
+        Movie m1 = new Movie("Avatar", "drama",120);
+        movieRepository.save(m1);
+        Movie m2 = new Movie("Avatar 2", "drama",180);
+        movieRepository.save(m2);
+
+        Room r1 = new Room("A101", 20,20);
+        roomRepository.save(r1);
+        Room r2 = new Room("A102", 20,20);
+        roomRepository.save(r2);
     }
 }

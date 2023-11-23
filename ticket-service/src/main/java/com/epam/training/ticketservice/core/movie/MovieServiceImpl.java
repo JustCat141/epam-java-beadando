@@ -17,7 +17,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Optional<MovieDto> createMovie(MovieDto movieDto) {
-        var existingMovie = movieRepository.findById(movieDto.title());
+        var existingMovie = movieRepository.findByTitle(movieDto.title());
 
         if(existingMovie.isPresent()) {
             return Optional.empty();
@@ -35,7 +35,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Optional<MovieDto> updateMovie(MovieDto movieDto) {
-        Optional<Movie> movieToUpdate = movieRepository.findById(movieDto.title());
+        Optional<Movie> movieToUpdate = movieRepository.findByTitle(movieDto.title());
 
         if (movieToUpdate.isEmpty()) {
             return Optional.empty();
@@ -51,12 +51,12 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Optional<MovieDto> deleteMovie(String title) {
-        var movie = movieRepository.findById(title);
+        var movie = movieRepository.findByTitle(title);
         if(movie.isEmpty()) {
             return Optional.empty();
         }
 
-        movieRepository.deleteById(title);
+        movieRepository.deleteById(movie.get().getId());
         return Optional.of(movie.get().asDto());
     }
 

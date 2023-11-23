@@ -1,11 +1,13 @@
 package com.epam.training.ticketservice.core.movie.persistence;
 
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
+import com.epam.training.ticketservice.core.screening.persistence.Screening;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
