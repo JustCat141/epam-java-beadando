@@ -1,5 +1,6 @@
 package com.epam.training.ticketservice.core.movie.persistence;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "movies")
 public class Movie {
 
@@ -18,10 +20,4 @@ public class Movie {
     private String genre;
 
     private Integer length;
-
-    public Movie(String title, String genre, Integer length) {
-        this.title = title;
-        this.genre = genre;
-        this.length = length;
-    }
 }
