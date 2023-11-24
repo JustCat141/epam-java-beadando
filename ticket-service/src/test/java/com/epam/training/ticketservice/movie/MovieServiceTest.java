@@ -5,12 +5,6 @@ import com.epam.training.ticketservice.core.movie.MovieServiceImpl;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
-import com.epam.training.ticketservice.core.user.UserService;
-import com.epam.training.ticketservice.core.user.UserServiceImpl;
-import com.epam.training.ticketservice.core.user.model.UserDto;
-import com.epam.training.ticketservice.core.user.persistence.User;
-import com.epam.training.ticketservice.core.user.persistence.UserRepository;
-import com.epam.training.ticketservice.core.user.persistence.UserRole;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
