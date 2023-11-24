@@ -3,12 +3,14 @@ package com.epam.training.ticketservice.core.screening;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
+import com.epam.training.ticketservice.core.screening.persistence.Screening;
 import com.epam.training.ticketservice.core.screening.persistence.ScreeningRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -65,5 +67,13 @@ public class ScreeningServiceImpl implements ScreeningService {
             return Optional.of(screening.get().asDto());
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<ScreeningDto> getScreeningList() {
+        return screeningRepository.findAll()
+                .stream()
+                .map(Screening::asDto)
+                .toList();
     }
 }

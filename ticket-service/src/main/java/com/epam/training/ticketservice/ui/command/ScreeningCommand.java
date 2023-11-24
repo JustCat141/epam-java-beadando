@@ -9,16 +9,19 @@ import com.epam.training.ticketservice.core.screening.persistence.ScreeningRepos
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellMethodAvailability;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 @ShellComponent
 @AllArgsConstructor
-public class ScreeningCommand {
+public class ScreeningCommand extends CommandAvailability {
 
     private final ScreeningService screeningService;
 
+    @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "create screening", value = "Creates a screening")
     public String createScreening(String movieTitle, String roomName, String date) {
         var screeningDto = screeningService.createScreening(movieTitle, roomName, date);
@@ -32,12 +35,31 @@ public class ScreeningCommand {
         }
     }
 
+    @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "delete screening", value = "Deletes a screening")
     public String deleteScreening(String movieTitle, String roomName, String startOfScreening) {
         var startDate = LocalDateTime.parse(startOfScreening, DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT));
         return screeningService.deleteScreening(movieTitle, roomName, startDate)
                 .map(screeningDto -> screeningDto + " has been deleted!")
                 .orElse("There isn't any screening with these data!");
+    }
+
+    @ShellMethod(key = "list screenings")
+    public String listRooms() {
+        var screenings = screeningService.getScreeningList();
+
+        if (screenings.isEmpty()) {
+            return "There are no screenings";
+        }
+        return screenings
+                .stream()
+                .map(screeningDto -> String.format("%s (%s, %d), screened in room %s, at %s",
+                        screeningDto.movie().getTitle(),
+                        screeningDto.movie().getGenre(),
+                        screeningDto.movie().getLength(),
+                        screeningDto.room().getName(),
+                        screeningDto.endOfScreening().format(DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT))))
+                .collect(Collectors.joining("\n"));
     }
 }
     // create screening Avatar A101 "2021-03-14 16:00"

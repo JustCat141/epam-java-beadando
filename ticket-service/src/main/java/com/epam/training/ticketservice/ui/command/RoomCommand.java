@@ -5,14 +5,16 @@ import com.epam.training.ticketservice.core.room.model.RoomDto;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellMethodAvailability;
 
 import java.util.stream.Collectors;
 
 @ShellComponent
 @AllArgsConstructor
-public class RoomCommand {
+public class RoomCommand extends CommandAvailability{
     private RoomService roomService;
 
+    @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "create room", value = "Creates a room")
     public String createRoom(String name, Integer seatRows, Integer seatColumns) {
         var room = new RoomDto(name, seatRows, seatColumns);
@@ -21,6 +23,7 @@ public class RoomCommand {
                 .orElse("Room already exists with this name!");
     }
 
+    @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "update room")
     public String updateRoom(String name, Integer seatRows, Integer seatColumns) {
         var room = new RoomDto(name, seatRows, seatColumns);
@@ -29,6 +32,7 @@ public class RoomCommand {
                 .orElse("There are no rooms with this name!");
     }
 
+    @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "delete room")
     public String deleteRoom(String name) {
         return roomService.deleteRoom(name)

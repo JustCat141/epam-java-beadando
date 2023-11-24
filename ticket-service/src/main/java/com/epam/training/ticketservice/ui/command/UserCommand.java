@@ -2,23 +2,19 @@ package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.user.UserService;
 import com.epam.training.ticketservice.core.user.model.UserDto;
-import com.epam.training.ticketservice.core.user.persistence.User;
 import com.epam.training.ticketservice.core.user.persistence.UserRole;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellMethodAvailability;
 
 import java.util.Optional;
 
 @ShellComponent
 @AllArgsConstructor
-public class UserCommand {
+public class UserCommand extends CommandAvailability {
     private final UserService userService;
-    //private final AdminCommandAvailability adminCommandAvailability;
 
-    //@ShellMethodAvailability("isAvailableCommand")
     @ShellMethod(key = "sign in privileged", value = "User login")
     public String login(String username, String password) {
         return userService.login(username,password)
@@ -26,7 +22,6 @@ public class UserCommand {
                 .orElse("Login failed due to incorrect credentials");
     }
 
-    //@ShellMethodAvailability("isAvailableCommand")
     @ShellMethod(key = "sign out", value = "User logout")
     public String logout() {
         return userService.logout()
@@ -37,7 +32,13 @@ public class UserCommand {
     @ShellMethod(key = "describe account", value = "Prints info of current account")
     public String describe() {
         return userService.describe()
-                .map(userDto -> "Signed in with privileged account " + userDto.username())
+                .map(userDto -> {
+                    if (userDto.role().equals(UserRole.ADMIN)) {
+                        return "Signed in with privileged account " + userDto.username();
+                    } else {
+                        return "Signed in with account " + userDto.username();
+                    }
+                })
                 .orElse("You are not signed in");
     }
 
