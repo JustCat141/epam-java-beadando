@@ -13,8 +13,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
     @Mock
@@ -64,6 +63,7 @@ public class UserServiceTest {
 
         // Assert
         assertEquals(expected, result);
+        verify(userRepository, times(1)).findByUsernameAndPassword("user", "password");
     }
 
     @Test
@@ -88,6 +88,7 @@ public class UserServiceTest {
         // Assert
         assertTrue(result.isPresent());
         assertEquals(expected, result);
+        verify(userRepository, times(1)).findByUsernameAndPassword("user", "password");
     }
 
     @Test
