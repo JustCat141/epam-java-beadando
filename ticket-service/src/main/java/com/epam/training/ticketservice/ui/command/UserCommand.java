@@ -41,11 +41,4 @@ public class UserCommand extends CommandAvailability {
                 })
                 .orElse("You are not signed in");
     }
-
-    private Availability isAvailableCommand() {
-        Optional<UserDto> user = userService.describe();
-        return user.isPresent() && user.get().role() == UserRole.ADMIN
-                ? Availability.available()
-                : Availability.unavailable("You are not an admin!");
-    }
 }
