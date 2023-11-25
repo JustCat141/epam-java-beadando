@@ -39,10 +39,4 @@ public class UserServiceImpl implements UserService {
     public Optional<UserDto> describe() {
         return Optional.ofNullable(loggedInUser);
     }
-
-    @Override
-    public void registerUser(String username, String password) {
-        var user = new User(username, password, UserRole.USER);
-        userRepository.save(user);
-    }
 }

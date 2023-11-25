@@ -11,6 +11,4 @@ public interface UserService {
     Optional<UserDto> logout();
 
     Optional<UserDto> describe();
-
-    void registerUser(String username, String password);
 }
