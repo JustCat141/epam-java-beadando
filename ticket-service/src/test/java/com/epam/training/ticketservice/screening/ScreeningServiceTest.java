@@ -34,7 +34,7 @@ public class ScreeningServiceTest {
     private final ScreeningRepository screeningRepository = mock(ScreeningRepository.class);
 
     @InjectMocks
-    private ScreeningService underTest = new ScreeningServiceImpl(movieRepository,roomRepository,screeningRepository);
+    private ScreeningService underTest = new ScreeningServiceImpl(movieRepository, roomRepository, screeningRepository);
 
     @Test
     void testCreateScreeningShouldReturnScreeningDtoWhenValidInput() {
@@ -153,5 +153,67 @@ public class ScreeningServiceTest {
         verify(screeningRepository).findAllByRoomName(room.getName());
     }
 
+    @Test
+    void testDeleteScreeningShouldReturnScreeningDtoWhenScreeningDeleted() {
+        String movieTitle = "Movie1";
+        String roomName = "Room1";
+        LocalDateTime startOfScreening = LocalDateTime.parse("2021-03-14 16:00", DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT));
 
+        Screening screening = new Screening(new Movie(movieTitle, "Genre", 120),
+                new Room(roomName, 5, 10), startOfScreening);
+        when(screeningRepository.findByMovieTitleAndRoomNameAndStartOfScreening(movieTitle, roomName, startOfScreening))
+                .thenReturn(Optional.of(screening));
+
+        Optional<ScreeningDto> result = underTest.deleteScreening(movieTitle, roomName, startOfScreening);
+
+        assertTrue(result.isPresent());
+        assertEquals(screening.asDto(), result.get());
+
+        verify(screeningRepository).findByMovieTitleAndRoomNameAndStartOfScreening(movieTitle, roomName, startOfScreening);
+        verify(screeningRepository).delete(screening);
+    }
+
+    @Test
+    void testDeleteScreeningShouldReturnEmptyWhenScreeningDoesNotExist() {
+        String movieTitle = "NonExistingMovie";
+        String roomName = "Room1";
+        LocalDateTime startOfScreening = LocalDateTime.parse("2023-12-01 14:00", DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT));
+
+        when(screeningRepository.findByMovieTitleAndRoomNameAndStartOfScreening(movieTitle, roomName, startOfScreening))
+                .thenReturn(Optional.empty());
+
+        Optional<ScreeningDto> result = underTest.deleteScreening(movieTitle, roomName, startOfScreening);
+
+        assertTrue(result.isEmpty());
+
+        verify(screeningRepository).findByMovieTitleAndRoomNameAndStartOfScreening(movieTitle, roomName, startOfScreening);
+        verify(screeningRepository, never()).delete(any());
+    }
+
+    @Test
+    void testGetScreeningListShouldReturnListOfScreenings() {
+        Screening screening1 = new Screening(new Movie("Movie1", "Genre1", 120),
+                new Room("Room1", 5, 10), LocalDateTime.now());
+        Screening screening2 = new Screening(new Movie("Movie2", "Genre2", 150),
+                new Room("Room2", 6, 12), LocalDateTime.now().plusDays(1));
+
+        when(screeningRepository.findAll()).thenReturn(List.of(screening1, screening2));
+
+        List<ScreeningDto> screeningList = underTest.getScreeningList();
+
+        assertEquals(2, screeningList.size());
+
+        verify(screeningRepository).findAll();
+    }
+
+    @Test
+    void testGetScreeningListShouldReturnEmptyListOfScreeningsWhenScreeningsArentAvailable() {
+        when(screeningRepository.findAll()).thenReturn(List.of());
+
+        List<ScreeningDto> screeningList = underTest.getScreeningList();
+
+        assertEquals(0, screeningList.size());
+
+        verify(screeningRepository).findAll();
+    }
 }
