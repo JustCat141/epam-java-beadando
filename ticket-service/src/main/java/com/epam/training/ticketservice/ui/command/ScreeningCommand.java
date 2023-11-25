@@ -58,7 +58,7 @@ public class ScreeningCommand extends CommandAvailability {
                         screeningDto.movie().getGenre(),
                         screeningDto.movie().getLength(),
                         screeningDto.room().getName(),
-                        screeningDto.endOfScreening().format(DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT))))
+                        screeningDto.startOfScreening().format(DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT))))
                 .collect(Collectors.joining("\n"));
     }
 }
