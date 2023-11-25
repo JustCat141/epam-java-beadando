@@ -1,6 +1,5 @@
 package com.epam.training.ticketservice.core.movie.persistence;
 
-import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

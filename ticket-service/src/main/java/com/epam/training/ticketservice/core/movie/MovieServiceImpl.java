@@ -19,7 +19,7 @@ public class MovieServiceImpl implements MovieService {
     public Optional<MovieDto> createMovie(MovieDto movieDto) {
         var existingMovie = movieRepository.findByTitle(movieDto.title());
 
-        if(existingMovie.isPresent()) {
+        if (existingMovie.isPresent()) {
             return Optional.empty();
         }
 
@@ -52,7 +52,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Optional<MovieDto> deleteMovie(String title) {
         var movie = movieRepository.findByTitle(title);
-        if(movie.isEmpty()) {
+        if (movie.isEmpty()) {
             return Optional.empty();
         }
 

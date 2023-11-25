@@ -2,7 +2,6 @@ package com.epam.training.ticketservice.core.movie;
 
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

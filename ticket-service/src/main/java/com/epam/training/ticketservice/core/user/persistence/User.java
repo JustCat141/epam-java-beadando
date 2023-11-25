@@ -4,7 +4,13 @@ import com.epam.training.ticketservice.core.user.model.UserDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 
 @Entity
 @Data

@@ -28,11 +28,11 @@ public class ScreeningServiceImpl implements ScreeningService {
         var room = roomRepository.findByName(roomName);
         var start = LocalDateTime.parse(startOfScreening, DateTimeFormatter.ofPattern(DATE_FORMAT));
 
-        if(movie.isEmpty() || room.isEmpty()) {
+        if (movie.isEmpty() || room.isEmpty()) {
             return null;
         }
 
-        return new ScreeningDto(movie.get(),room.get(),start);
+        return new ScreeningDto(movie.get(), room.get(), start);
     }
 
     @Override
@@ -60,8 +60,13 @@ public class ScreeningServiceImpl implements ScreeningService {
     }
 
     @Override
-    public Optional<ScreeningDto> deleteScreening(String movieTitle, String roomName, LocalDateTime startOfScreening) {
-        var screening = screeningRepository.findByMovieTitleAndRoomNameAndStartOfScreening(movieTitle, roomName, startOfScreening);
+    public Optional<ScreeningDto> deleteScreening(
+            String movieTitle,
+            String roomName,
+            LocalDateTime startOfScreening) {
+        var screening = screeningRepository
+                .findByMovieTitleAndRoomNameAndStartOfScreening(movieTitle, roomName, startOfScreening);
+
         if (screening.isPresent()) {
             screening.ifPresent(screeningRepository::delete);
             return Optional.of(screening.get().asDto());

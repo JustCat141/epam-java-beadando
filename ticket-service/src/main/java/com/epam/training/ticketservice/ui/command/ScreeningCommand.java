@@ -38,7 +38,10 @@ public class ScreeningCommand extends CommandAvailability {
     @ShellMethodAvailability("isAdmin")
     @ShellMethod(key = "delete screening", value = "Deletes a screening")
     public String deleteScreening(String movieTitle, String roomName, String startOfScreening) {
-        var startDate = LocalDateTime.parse(startOfScreening, DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT));
+        var startDate = LocalDateTime.parse(
+                startOfScreening,
+                DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT));
+
         return screeningService.deleteScreening(movieTitle, roomName, startDate)
                 .map(screeningDto -> screeningDto + " has been deleted!")
                 .orElse("There isn't any screening with these data!");
@@ -58,8 +61,8 @@ public class ScreeningCommand extends CommandAvailability {
                         screeningDto.movie().getGenre(),
                         screeningDto.movie().getLength(),
                         screeningDto.room().getName(),
-                        screeningDto.startOfScreening().format(DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT))))
+                        screeningDto.startOfScreening()
+                                .format(DateTimeFormatter.ofPattern(ScreeningServiceImpl.DATE_FORMAT))))
                 .collect(Collectors.joining("\n"));
     }
 }
-    // create screening Avatar A101 "2021-03-14 16:00"

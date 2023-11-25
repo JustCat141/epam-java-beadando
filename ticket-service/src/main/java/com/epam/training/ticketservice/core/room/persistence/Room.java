@@ -1,13 +1,15 @@
 package com.epam.training.ticketservice.core.room.persistence;
 
 import com.epam.training.ticketservice.core.room.model.RoomDto;
-import com.epam.training.ticketservice.core.screening.persistence.Screening;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
 @Data

@@ -1,6 +1,5 @@
 package com.epam.training.ticketservice.core.room;
 
-import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.persistence.Room;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
@@ -20,7 +19,7 @@ public class RoomServiceImpl implements RoomService {
     public Optional<RoomDto> createRoom(RoomDto roomDto) {
         var existingRoom = roomRepository.findByName(roomDto.name());
 
-        if(existingRoom.isPresent()) {
+        if (existingRoom.isPresent()) {
             return Optional.empty();
         }
 
@@ -53,7 +52,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Optional<RoomDto> deleteRoom(String name) {
         var room = roomRepository.findByName(name);
-        if(room.isEmpty()) {
+        if (room.isEmpty()) {
             return Optional.empty();
         }
 

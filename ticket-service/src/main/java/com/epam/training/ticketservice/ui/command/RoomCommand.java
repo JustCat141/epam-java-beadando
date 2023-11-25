@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @ShellComponent
 @AllArgsConstructor
-public class RoomCommand extends CommandAvailability{
+public class RoomCommand extends CommandAvailability {
     private RoomService roomService;
 
     @ShellMethodAvailability("isAdmin")
@@ -19,7 +19,7 @@ public class RoomCommand extends CommandAvailability{
     public String createRoom(String name, Integer seatRows, Integer seatColumns) {
         var room = new RoomDto(name, seatRows, seatColumns);
         return roomService.createRoom(room)
-                .map(roomDto -> roomDto.name() +" has been created successfully")
+                .map(roomDto -> roomDto.name() + " has been created successfully")
                 .orElse("Room already exists with this name!");
     }
 
