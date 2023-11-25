@@ -95,7 +95,7 @@
                             <excludes>
                                 <exclude>com/epam/training/ticketservice/Application.*</exclude>
                                 <exclude>com/epam/training/ticketservice/core/config/**</exclude>
-                                <exclude>com/epam/training/ticketservice/ui/**</exclude>
+                                <exclude>com/epam/training/ticketservice/ui/configuration/**</exclude>
                             </excludes>
                             <rules>
                                 <rule>
