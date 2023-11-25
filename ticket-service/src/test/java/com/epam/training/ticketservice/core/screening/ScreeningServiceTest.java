@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.screening;
+package com.epam.training.ticketservice.core.screening;
 
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;

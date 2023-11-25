@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.movie;
+package com.epam.training.ticketservice.ui;
 
 import com.epam.training.ticketservice.core.movie.MovieService;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
@@ -15,7 +15,6 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest
 @ActiveProfiles("it")
 public class MovieCommandTest {
-
     @Autowired
     private Shell shell;
 

@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.room;
+package com.epam.training.ticketservice.core.room;
 
 import com.epam.training.ticketservice.core.room.RoomService;
 import com.epam.training.ticketservice.core.room.RoomServiceImpl;

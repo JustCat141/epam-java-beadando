@@ -1,4 +1,4 @@
-package com.epam.training.ticketservice.user;
+package com.epam.training.ticketservice.core.user;
 
 import com.epam.training.ticketservice.core.user.persistence.User;
 import com.epam.training.ticketservice.core.user.persistence.UserRole;
