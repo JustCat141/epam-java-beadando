@@ -26,18 +26,5 @@ public class InMemoryDatabaseInitializer {
     public void init() {
         User admin = new User("admin","admin", UserRole.ADMIN);
         userRepository.save(admin);
-
-        User test = new User("test","test", UserRole.USER);
-        userRepository.save(test);
-
-        Movie m1 = new Movie("Avatar", "drama",120);
-        movieRepository.save(m1);
-        Movie m2 = new Movie("Avatar 2", "drama",180);
-        movieRepository.save(m2);
-
-        Room r1 = new Room("A101", 20,20);
-        roomRepository.save(r1);
-        Room r2 = new Room("A102", 20,20);
-        roomRepository.save(r2);
     }
 }

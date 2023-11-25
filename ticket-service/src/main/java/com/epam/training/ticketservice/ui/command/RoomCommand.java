@@ -49,7 +49,7 @@ public class RoomCommand extends CommandAvailability{
         }
         return rooms
                 .stream()
-                .map(roomDto -> String.format("Room %s with %d seats, %d rows and %d columns)",
+                .map(roomDto -> String.format("Room %s with %d seats, %d rows and %d columns",
                         roomDto.name(),
                         roomDto.seatCount(),
                         roomDto.seatRows(),

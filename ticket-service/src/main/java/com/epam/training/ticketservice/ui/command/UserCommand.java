@@ -18,7 +18,7 @@ public class UserCommand extends CommandAvailability {
     @ShellMethod(key = "sign in privileged", value = "User login")
     public String login(String username, String password) {
         return userService.login(username,password)
-                .map(userDto -> "Signed in with privileged account " + userDto.username())
+                .map(userDto -> String.format("Signed in with privileged account '%s'", userDto.username()))
                 .orElse("Login failed due to incorrect credentials");
     }
 

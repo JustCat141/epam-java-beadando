@@ -53,7 +53,7 @@ public class ScreeningCommand extends CommandAvailability {
         }
         return screenings
                 .stream()
-                .map(screeningDto -> String.format("%s (%s, %d), screened in room %s, at %s",
+                .map(screeningDto -> String.format("%s (%s, %d minutes), screened in room %s, at %s",
                         screeningDto.movie().getTitle(),
                         screeningDto.movie().getGenre(),
                         screeningDto.movie().getLength(),
